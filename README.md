@@ -18,8 +18,11 @@ It looks like there is a noticeable change in coordinates after 1600ms at first 
 #### Correlation between Features
 I next check the correlation between features to see if any range of the data trajectory. The figure below suggests that consecutive data of each eye show medium to high positive correlation.   
 ![original_heatmap](https://user-images.githubusercontent.com/30448897/129472994-aac7c136-0cd5-4833-bbc5-308d2b910156.png)   
-One intesting findings on the figure above is the highly-correlated area between the y coordinates between left eye and right eye while x coordinates don't show this behavior. Closer look at the two regions of heatmap can be found below. It is expected that the Y coordinates of left and right eyes are highly correlated as (almost) everyone cannot decouple the synchroized vertical motion of eyes.
-![original_heatmap_two_eye_corr_x](https://user-images.githubusercontent.com/30448897/129473612-662598b9-faa3-4945-8361-4302c6f5b9b2.png)|![original_heatmap_two_eye_corr_y](https://user-images.githubusercontent.com/30448897/129473623-0b69669b-1ce5-4511-8902-64dd21bb075a.png)
+One intesting findings on the figure above is the highly-correlated area between the y coordinates between left eye and right eye while x coordinates don't show this behavior. Closer look at the two regions of heatmap can be found below. It is expected that the Y coordinates of left and right eyes are highly correlated as (almost) everyone cannot decouple the synchroized vertical motion of eyes.   
+Correlation of X|Correlation of Y
+---|---|
+![original_heatmap_two_eye_corr_x](https://user-images.githubusercontent.com/30448897/129473612-662598b9-faa3-4945-8361-4302c6f5b9b2.png)|![original_heatmap_two_eye_corr_y](https://user-images.githubusercontent.com/30448897/129473623-0b69669b-1ce5-4511-8902-64dd21bb075a.png)   
+
 The heatmaps of the second set of data, the calculated difference between two consecutive responses, can be found below. The correlation between left and right eye or X and Y coordinate has been minimized in this new data set, as suggested by the heatmaps.
 ![diff_heatmap_3in1](https://user-images.githubusercontent.com/30448897/129495724-a1ce2c6a-e0f2-458e-9530-6f5b06d2c5c6.png)
 
