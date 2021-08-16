@@ -34,7 +34,7 @@ Origianl Data|Difference Data|
 :---:|:---:|
 ![Devation between Linear and RBF kernel for original data set](https://user-images.githubusercontent.com/30448897/129496539-b1b8cb96-7b36-4b04-af0b-b72bbda22770.png)|![Devation between Linear and RBF kernel for Diff Data set](https://user-images.githubusercontent.com/30448897/129496542-bf2e3cb5-3f66-4db1-bcc5-375013efa806.png)
 
-One can easily find that Object 1 has the highest occurrence of inconsistency in both data set. This might be worth investigating if one can obtain the accurate prediction for the test data in the future.
+One can easily find that Object 1 has the highest occurrence of inconsistency in both data set. This might be worth investigating if one can obtain the accurate prediction for the test data in the future.   
 I also compared predicted results between two data sets when the two models both use RBF kernel. The figure below suggests that the two models could generate significant outcomes, as only 51.5% of the results are identical between them. The object groups that show different outcomes are also spread across mutiple groups, which could indicate there is fundamental difference between the two SVC models from two different training data.
 ![Devation between Original and Diff Data sets](https://user-images.githubusercontent.com/30448897/129496784-44d860a5-7f69-4a00-bdcc-2fd809966e51.png)
 
