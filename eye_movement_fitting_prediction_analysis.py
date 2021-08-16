@@ -137,15 +137,17 @@ test_diff_data.head(5)
 
 # plot the heatmap for the new variables calculated from difference
 correlation_training_diff = training_diff_data.drop(['class'],axis=1).corr()
-sn.heatmap(correlation_training_diff,cmap="YlGnBu")
-
+fig, axes = plt.subplots(ncols=1, nrows=3, figsize=(20,20),constrained_layout=True)
+sn.heatmap(correlation_training_diff,cmap="YlGnBu",ax=axes[0])
 # a closer look at the block on the heatmap of correlation,
 # where the correlation between the x coordinates of left eye and right eye are calcualted
-sn.heatmap(correlation_training_diff.iloc[:len(position_range),:len(position_range)],cmap="YlGnBu")
-
+sn.heatmap(correlation_training_diff.iloc[:len(position_range),:len(position_range)],cmap="YlGnBu", ax=axes[1])
 # a closer look at the block on the heatmap of correlation,
 # where the correlation between the y coordinates of left eye and right eye are calcualted
-sn.heatmap(correlation_training_diff.iloc[2*len(position_range):3*len(position_range),2*len(position_range):3*len(position_range)],cmap="YlGnBu")
+sn.heatmap(correlation_training_diff.iloc[2*len(position_range):3*len(position_range),2*len(position_range):3*len(position_range)],cmap="YlGnBu",ax=axes[2])
+axes[0].set_title("Correlation of Difference Data between Features", size=18)
+axes[1].set_title("Correlation of X between left and right eye", size=18)
+axes[2].set_title("Correlation of Y between left and right eye", size=18)
 
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
