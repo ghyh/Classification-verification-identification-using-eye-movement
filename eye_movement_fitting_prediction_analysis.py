@@ -45,7 +45,7 @@ print(missing_values(training_data))
 #left_range_96 = [*range(96)]
 #training_data.drop(['class'],axis=1).iloc[0][left_range_96].plot.bar()
 
- a closer look at the data range where stimulus point disappeared from the middle of the screen
+# a closer look at the data range where stimulus point disappeared from the middle of the screen
 position_range = [*range(2048)]
 stable_duration = [*range(int(1600/4))]
 blank_duration_neighborhood = [*range(int(1600/4)-12,int((1600+20)/4)+24)]
@@ -56,6 +56,11 @@ training_data.drop(['class'],axis=1).iloc[0][[len(position_range)*0 + idx for id
 training_data.drop(['class'],axis=1).iloc[0][[len(position_range)*1 + idx for idx in blank_duration_neighborhood]].plot.bar(ax=axes[0][1])
 training_data.drop(['class'],axis=1).iloc[0][[len(position_range)*2 + idx for idx in blank_duration_neighborhood]].plot.bar(ax=axes[1][0])
 training_data.drop(['class'],axis=1).iloc[0][[len(position_range)*3 + idx for idx in blank_duration_neighborhood]].plot.bar(ax=axes[1][1])
+fig.suptitle("Stimulus Point Disappeared from Middle",size=20)
+axes[0][0].set_title("l_x", size=18)
+axes[0][1].set_title("r_x", size=18)
+axes[1][0].set_title("l_y", size=18)
+axes[1][1].set_title("r_y", size=18)
 
 # a closer look at range of data where the stimulus points started to show on corners
 fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(20,20))
@@ -63,6 +68,11 @@ training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*0+420,l
 training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*1+420,len(position_range)*1 + 468)]].plot.bar(ax=axes[0][1])
 training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*2+420,len(position_range)*2 + 468)]].plot.bar(ax=axes[1][0])
 training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*3+420,len(position_range)*3 + 468)]].plot.bar(ax=axes[1][1])
+fig.suptitle("Stimulus Points Showing on Corners",size=20)
+axes[0][0].set_title("l_x", size=18)
+axes[0][1].set_title("r_x", size=18)
+axes[1][0].set_title("l_y", size=18)
+axes[1][1].set_title("r_y", size=18)
 
 # a closer look at the data range where stimulus points stayed around the middle of the screen
 fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(20,20))
@@ -70,6 +80,11 @@ training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*0,len(p
 training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*1,len(position_range)*1 + 400)]].plot.bar(ax=axes[0][1])
 training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*2,len(position_range)*2 + 400)]].plot.bar(ax=axes[1][0])
 training_data.drop(['class'],axis=1).iloc[0][[*range(len(position_range)*3,len(position_range)*3 + 400)]].plot.bar(ax=axes[1][1])
+fig.suptitle("Stimulus Showing in the Middle (Beginning)",size=20)
+axes[0][0].set_title("l_x",size=18)
+axes[0][1].set_title("r_x",size=18)
+axes[1][0].set_title("l_y",size=18)
+axes[1][1].set_title("r_y",size=18)
 
 # correlation between columns
 import seaborn as sn
@@ -78,11 +93,15 @@ sn.heatmap(correlation_training,cmap="YlGnBu")
 
 # closeup at correlation_training
 # lx - rx
-sn.heatmap(correlation_training.iloc[len(position_range)+1:len(position_range)*2,0:len(position_range)],cmap='YlGnBu')
+axes = plt.axes()
+sn.heatmap(correlation_training.iloc[len(position_range)+1:len(position_range)*2,0:len(position_range)],cmap='YlGnBu', ax=axes)
+axes.set_title("Correlation of X between left and right eye",size=18)
 
 # closeup at correlation_training
 # ly-ry
-sn.heatmap(correlation_training.iloc[len(position_range)*3+1:,len(position_range)*2+1:len(position_range)*3],cmap='YlGnBu')
+axes = plt.axes()
+sn.heatmap(correlation_training.iloc[len(position_range)*3+1:,len(position_range)*2+1:len(position_range)*3],cmap='YlGnBu', ax=axes)
+axes.set_title("Correlation of Y between left and right eye",size=18)
 
 # generate dataframe of difference between consecutive test inputs for the training set
 training_diff_data = pd.DataFrame(training_data['class'],columns=['class'])
@@ -118,15 +137,17 @@ test_diff_data.head(5)
 
 # plot the heatmap for the new variables calculated from difference
 correlation_training_diff = training_diff_data.drop(['class'],axis=1).corr()
-sn.heatmap(correlation_training_diff,cmap="YlGnBu")
-
+fig, axes = plt.subplots(ncols=1, nrows=3, figsize=(20,20),constrained_layout=True)
+sn.heatmap(correlation_training_diff,cmap="YlGnBu",ax=axes[0])
 # a closer look at the block on the heatmap of correlation,
 # where the correlation between the x coordinates of left eye and right eye are calcualted
-sn.heatmap(correlation_training_diff.iloc[:len(position_range),:len(position_range)],cmap="YlGnBu")
-
+sn.heatmap(correlation_training_diff.iloc[:len(position_range),:len(position_range)],cmap="YlGnBu", ax=axes[1])
 # a closer look at the block on the heatmap of correlation,
 # where the correlation between the y coordinates of left eye and right eye are calcualted
-sn.heatmap(correlation_training_diff.iloc[2*len(position_range):3*len(position_range),2*len(position_range):3*len(position_range)],cmap="YlGnBu")
+sn.heatmap(correlation_training_diff.iloc[2*len(position_range):3*len(position_range),2*len(position_range):3*len(position_range)],cmap="YlGnBu",ax=axes[2])
+axes[0].set_title("Correlation of Difference Data between Features", size=18)
+axes[1].set_title("Correlation of X between left and right eye", size=18)
+axes[2].set_title("Correlation of Y between left and right eye", size=18)
 
 from sklearn.svm import SVC
 from sklearn.svm import LinearSVC
